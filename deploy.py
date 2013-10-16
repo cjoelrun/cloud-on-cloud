@@ -23,12 +23,13 @@ def build_allinone():
 def provision_environment():
     pass
 
+
 def deploy(user, api_key):
     client = connection(user, api_key)
-    flavor =  next(flavor.id for flavor in client.flavors.list()
-                   if "1GB" in flavor.name)
-    image =  next(image.id for image in client.images.list()
-                  if "Ubuntu 12.04" in image.name)
+    flavor = next(flavor.id for flavor in client.flavors.list()
+                  if "1GB" in flavor.name)
+    image = next(image.id for image in client.images.list()
+                 if "Ubuntu 12.04" in image.name)
 
     gevent.joinall([build_chef_server,
                     build_allinone])
